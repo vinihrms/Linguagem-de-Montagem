@@ -1,9 +1,9 @@
 ; Aula 01 - Introdução
-; hello.asm
+; ola.asm
 ; Meu primeiro assembly!
-; montar: nasm -f elf64 hello.asm 
-; lingar: ld hello.o -o hello.x
-; sugestão: nasm -f elf64 hello.asm && ld hello.o -o hello.x
+; montar: nasm -f elf64 ola.asm 
+; linkar: ld ola.o -o ola.x
+; sugestão: nasm -f elf64 ola.asm && ld ola.o -o ola.x
 
 section .data
     strNome :  db "Vinícius", 10
