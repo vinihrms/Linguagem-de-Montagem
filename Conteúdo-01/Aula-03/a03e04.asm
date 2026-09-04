@@ -6,6 +6,7 @@
 section .data
     ; int vetorInt[10] = {42,1, 2, 3, 4, 5, 6, 7, 8, 9};
     vetorInt : dd 42, 1, 2, 3, 4, 96, 6, 7, 8, 9
+    ; vetor de inteiros, cada posicao deve ter 32 bits
 
 section .text
     global _start
@@ -15,31 +16,32 @@ _start:
     ; *vetorInt
     ; cuidado: x86_64 contem endereços de 8 bytes
     lea r8, [vetorInt]
+um:
 
     ; primeiro elemento do vetorInt
     ; vetorInt[0]
     ; cuidado: inteiro em x86_64 contem 4 bytes
     mov eax, [vetorInt]
-
+dois:
     ; como pegar o segundo elemento?
     ; vetorInt[1]
     ; deslocar o ponteiro vetorInt em 4 bytes, que eh o tamanho de um inteiro
     
     ; calculo de endereco de vetorInt[1] com LEA
     lea r9, [vetorInt + 4] ; adiciona-se 4 bytes ao end. vetorInt
-
+tres:
     ; busca do segundo elemento com MOV
     mov ebx, [r9]   ; r9 aponta para vetorInt+4 -> vetorInt[1]
     
     ; eh possivel indexar esse LEA?
     ; sim!!!!!
-    
+quatro:
     ; Regra: o calculo de endereco eh no formato [base + indexador * deslocamento]
     ; por exemplo, para recuperar o vetorInt[5], usa-se
     ; [base=vetorInt + indice=5 * tamanhoInteiro=4]
     lea r10, [vetorInt + 5 * 4]
     mov ecx, [r10]
-
+cinco:
     ; porem, eh possivel executar a busca diretamente com MOV
     mov edx, [vetorInt + 5 * 4]
 

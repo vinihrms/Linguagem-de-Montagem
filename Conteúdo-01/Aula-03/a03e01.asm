@@ -1,7 +1,9 @@
 ; Aula 03 - Registradores e MOV
 ; arquivo: a03e01.asm
 ; objetivo: acesso aos dados dos registradores e transferencias
-; nasm -f elf64 a03e01.asm ; ld a03e01.o -o a03e01.x
+; nasm -f elf64 a03e01.asm && ld a03e01.o -o a03e01.x && gdb ./a03e01.x
+; no gdb - i r 'registrador'
+
 
 section .data
     num: dq 0x7766554433221101
