@@ -5,7 +5,7 @@
 
 section .data
     ; vetor largura, altura e profundidade
-    dimensoes : dw 50, 65, -75 ; dw 16 = 0x00
+    dimensoes : dw 50, 65, -75 ; dw 16 = 0x0000
 
 section .bss
     volume : resq 1
@@ -15,10 +15,18 @@ section .text
 
 _start:
     ; aluno deve:
-        mov r8w, [dimensoes]
-        mov r9w, [dimensoes + 2]
-        mov r10w, [dimensoes + 4]
+        lea r11, [dimensoes]
+        lea r12, [dimensoes + 2]
+        lea r13, [dimensoes + 4]
 
+        ; mover largura para registrador r8?
+        mov r8, [r11]
+
+        ; mover altura para registrador r9?
+        mov r9, [r12]
+
+        ; mover profundidade para registrador r10?
+        mov r10, [r13]
 teste:
         ; ter cuidado com os tamanhos dos registradores
 
@@ -40,7 +48,7 @@ teste:
         ; cuidado com o sinal
     movsx rbx, ecx
 
-    mov qword [volume], rbx
+    mov [volume], rbx
 
 fim:
     mov rax, 60
