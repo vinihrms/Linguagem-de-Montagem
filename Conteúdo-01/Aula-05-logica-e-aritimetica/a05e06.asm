@@ -37,12 +37,12 @@ divisao0:
     div dword [divisor1]  ; pode ser memória
 
 divisao1:
-      ; EAX <- dividendo1 = -100
+      ; EAX <- dividendo2 = -100
       ; EDX:EAX <- EDX:EAX / divisor
     mov  eax, [dividendo2] ; bytes baixos
     cdq
     mov  ebx, [divisor1]   
-    idiv ebx               ; também pode ser registrador
+    idiv ebx           ; também pode ser registrador
 
 fim:
     mov rax, 60

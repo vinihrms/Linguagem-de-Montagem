@@ -70,6 +70,7 @@ escrita:
     lea rsi, [texto]
     mov edx, [textoL]
     syscall
+    
 
 fecha:
     mov rax, 3  ; fechar arquivo
