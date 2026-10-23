@@ -1,5 +1,5 @@
 ; Trabalho 01 - Collatz(n)
-; Arquivo: joao-rojas_vinicius-hermes.asm
+; Arquivo: collatz.asm
 
 ; Objetivo: 
     ; Calcular a sequência de Collatz para cada entrada, e ao final de cada execução,
@@ -10,13 +10,13 @@
     ; O programa rejeita e encerra entradas inválidas.
 
 ; montar, linkar e executar
-; nasm -f elf64 joao-rojas_vinicius-hermes.asm && ld joao-rojas_vinicius-hermes.o -o joao-rojas_vinicius-hermes.x && ./joao-rojas_vinicius-hermes.x
+; nasm -f elf64 collatz.asm && ld collatz.o -o collatz.x && ./collatz.x
 
 ; use isto para testar de 1 a 99 (depois de já montado e linkado uma vez 
 ;       [limpe ou apague o collatz.txt])
-;for i in $(seq 1 99); do
-;    printf '%s\n' "$i" | ./collatz
-;done
+for i in $(seq 1 99); do
+    printf '%s\n' "$i" | ./collatz
+done
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; INICIO ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -84,8 +84,6 @@ leitura:
     mov ecx, eax
     dec ecx
     
-    cmp byte [strLida], 45 ; hifen (-) para rejeitar números negativos 
-    je erro
 
     cmp byte [strLida + rcx], 10
     je remove_quebra_linha 
