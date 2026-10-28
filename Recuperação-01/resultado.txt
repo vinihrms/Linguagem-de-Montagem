@@ -1,0 +1,85 @@
+Vetor: 0
+Menor: 0
+Posicao: 0
+Soma: 0
+---
+Vetor: 9
+Menor: 9
+Posicao: 0
+Soma: 9
+---
+Vetor: 52917
+Menor: 1
+Posicao: 3
+Soma: 24
+---
+Vetor: 3303
+Menor: 0
+Posicao: 2
+Soma: 9
+---
+Vetor: 11111
+Menor: 1
+Posicao: 0
+Soma: 5
+---
+Vetor: 9876543210
+Menor: 0
+Posicao: 9
+Soma: 45
+---
+Vetor: 0123456789
+Menor: 0
+Posicao: 0
+Soma: 45
+---
+Vetor: 9999900000
+Menor: 0
+Posicao: 5
+Soma: 45
+---
+Vetor: 90807060504030201000
+Menor: 0
+Posicao: 1
+Soma: 45
+---
+Vetor: 12345678901234567890
+Menor: 0
+Posicao: 9
+Soma: 90
+---
+Vetor: 98765432101234567890
+Menor: 0
+Posicao: 9
+Soma: 90
+---
+Vetor: 00000000000000000000
+Menor: 0
+Posicao: 0
+Soma: 0
+---
+Vetor: 55555555555555555555
+Menor: 5
+Posicao: 0
+Soma: 100
+---
+Vetor: 12345678901234567890
+Menor: 0
+Posicao: 9
+Soma: 90
+---
+Vetor: 99999999999999999999
+Menor: 9
+Posicao: 0
+Soma: 180
+---
+Vetor: 98765432109876543210
+Menor: 0
+Posicao: 9
+Soma: 90
+---
+Vetor: 00000000000000000000
+Menor: 0
+Posicao: 0
+Soma: 0
+---

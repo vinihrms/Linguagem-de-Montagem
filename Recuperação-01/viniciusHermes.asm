@@ -17,7 +17,7 @@
 ;    tinha algo que dava pra abstrair esse write de \n 
 %macro endL 0
     mov rax, 1
-    mov rdi, [fd]
+    mov edi, [fd]
     lea rsi, [quebra]
     mov edx, quebraL
     syscall
@@ -27,7 +27,7 @@
 
 ; estabelecendo variaveis definidas
 section .data
-    strEntrada : db "Digite os digitos do vetor (max 20): ", 0
+    strEntrada : db "Digite os digitos do vetor (max 20): "
     strEntradaL: equ $ - strEntrada
 
     outVetor : db "Vetor: "
@@ -170,7 +170,7 @@ converteCada:
 ; aqui espera-se o vetor com cada posicao ter o valor inteiro
 fimConverte:
     ; cl o menor  ; aqui é um valor unitario, pode somar '0' sem ko
-    ; nesses rN pode ter bo 
+    ; nesses rN pode ter bo -> mesmo esquema do collatz ja q n teve pilha no conteudo da p1
     ; r11 indice do menor
     ; r10 é p ter somatorio
 
@@ -255,9 +255,6 @@ troca_SOMA:
 
 fim_reverte_SOMA:
     mov [strSomaL], r9b
-
-
-
 
 
 gravacao:
