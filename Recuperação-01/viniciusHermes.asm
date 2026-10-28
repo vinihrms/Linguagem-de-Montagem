@@ -4,7 +4,7 @@
 ; Objetivo: 
     ; Ler do teclado um valor numérico
     ; Transformar em vetor
-    ; Calcular o menor valor, com sua posição e exibir a soma
+    ; Pegar o menor valor, com sua posição e exibir a soma
 
 ; montar, linkar e executar
 ; nasm -f elf64 viniciusHermes.asm && ld viniciusHermes.o -o viniciusHermes.x && ./viniciusHermes.x
