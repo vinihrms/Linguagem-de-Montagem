@@ -1,7 +1,7 @@
 ; Aula 11 - Ponto-Flutuante
 ; a11e04.asm
 ; Identifica maior float entre dois entrados pelo usuário
-; nasm -f elf64 a11e04.asm ; gcc -m64 -no-pie a11e04.o -o a11e04.x
+; nasm -f elf64 a11e04.asm ; gcc -m64 -no-pie a11e04.o -o a11e04.x ; gdb ./a11e04.x
 
 %define _exit   60
 extern printf

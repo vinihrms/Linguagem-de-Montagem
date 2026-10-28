@@ -39,7 +39,8 @@ main:
     lea rcx, [scfP1+8] ; y1
     call scanf
   
-    ; eax = printf("Entre com Ponto_%d (int) no formato x y z: ", 2);
+
+  ; eax = printf("Entre com Ponto_%d (int) no formato x y z: ", 2);
     xor rax, rax
     mov rdi, pfstr1 ; string de controle para printf
     mov esi, 2
@@ -52,6 +53,31 @@ main:
     lea rdx, [scfP2+4] ; y2
     lea rcx, [scfP2+8] ; y2
     call scanf
+
+
+    mov rdi
+    mov rsi
+    mov edx
+    
+
+    call distancia
+
+
+fim:
+    ; "destack-frame!"
+    mov rsp, rbp
+    pop rbp
+
+    mov rax, _exit
+    mov rdi, 0
+    syscall
+
+
+
+
+distancia:
+    
+    
 
     ; conversão para double já em registradores
     ; xmm0-2 -> x1, y1, z1
@@ -88,12 +114,4 @@ main:
     mov rdi, pfstr2 ; string de controle para printf
     call printf
 
-fim:
-    ; "destack-frame!"
-    mov rsp, rbp
-    pop rbp
-
-    mov rax, _exit
-    mov rdi, 0
-    syscall
-
+    ret

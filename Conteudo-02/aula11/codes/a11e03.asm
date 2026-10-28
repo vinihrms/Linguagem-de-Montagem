@@ -33,7 +33,7 @@ main:
     mov rdi, scstr1
     lea rsi, [scfF1] ; Load Efective Address!!!
     call scanf
-l1:    
+l1:
     ; xmm0 = abs(scfF1)
     ; p1 - save regs - não necesário
     ; p2 - 1 parâmetro float em xmm0
@@ -79,7 +79,7 @@ absf:
     XORPS  xmm2, xmm2       ; xmm2 = (float) 0
     VSUBSS xmm1, xmm2, xmm0 ; xmm1 = xmm2 - xmm0
     MAXSS xmm0, xmm1        ; max(xmm0, (0-xmm1))
-
+b:
     ; p4 - resultado em xmm0 :)
 
     ; p5 - recuperar regs - não necessário
