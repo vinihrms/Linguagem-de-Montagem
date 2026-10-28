@@ -14,9 +14,9 @@
 
 ; use isto para testar de 1 a 99 (depois de já montado e linkado uma vez 
 ;       [limpe ou apague o collatz.txt])
-for i in $(seq 1 99); do
-    printf '%s\n' "$i" | ./collatz
-done
+;for i in $(seq 1 99); do
+;    printf '%s\n' "$i" | ./collatz
+;done
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; INICIO ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
