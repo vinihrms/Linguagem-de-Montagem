@@ -21,7 +21,8 @@ section .bss
     vetRDouble2 : resq 2
     alignb 32
     vetRDouble4 : resq 4
-
+    alignb
+    vetRDouble8 : resq 8
 
 section .text
     global main
@@ -62,12 +63,20 @@ b1:
     ; 4*64bits -> 256bits
     VMOVAPD ymm9, [vetDouble1] ; gdb_tip: p $ymm9.v4_double
 
+
+    ; tentando 8*64bits -> 512bits ;;;; funciona!!
+    VMOVAPD zmm9, [vetDouble1] ; gdb_tip: p $zmm9.v8_double
+
     ; Transferência DOUBLE xmm -> mem =====================
     ; 2*64bits -> 128bits
     MOVAPD [vetRDouble2], xmm8 ; gdb_tip: x /2fg &vetRDouble2
 
     ; 4*64bits -> 256bits
     VMOVAPD [vetRDouble4], ymm9 ; gdb_tip: x /4fg &vetRDouble4
+
+    ; 8*64bits -> 512bits
+    VMOVAPD [vetRDouble8], zmm9 ; gdb_tip: x /8fg &vetRDouble8
+
 
 fim:
     ; "destack-frame!"

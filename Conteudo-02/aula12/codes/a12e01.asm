@@ -7,11 +7,11 @@
 
 section .data
     align 32, db 0 ; alinhar memória ou SIGSEGV durante MOVDQA!
-    vetInt1 : dd 10, 20, 30, 40, 50, 60, 70, 80
+    vetInt1 : dd 10, 20, 30, 40, 50, 60, 70, 80 ; cada posicao é um inteiro (32 bits)
 
 section .bss
-    vetIntR1 : resd 2
-    vetIntR2 : resd 2
+    vetIntR1 : resd 2 
+    vetIntR2 : resd 2 
     alignb 16
     vetIntR3 : resd 4 ; alinhado em 16
     vetIntR4 : resd 4 ; pode ser desalinhado
