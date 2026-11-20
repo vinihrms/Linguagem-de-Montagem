@@ -1,89 +1,101 @@
-; aula 11 atividade 01 - potencia entre dois pontos (x, y, z)
+; aula 11 atividade 01 - distancia entre dois pontos (x, y, z)
 ; a11a01.asm
 ; nasm -f elf64 a11a01.asm ; gcc -m64 -no-pie a11a01.o -o a11a01.x
 
-%define _exit 60
-extern printf
-extern scanf
-
 ; double dis3Dlm(int p1[], int p2[])
 section .data
-    pfstr1 : db "Digite um Inteiro: ", 0
-    pfstr2 : db "Inteiro %d convertido para float = %f",10, 0
-    pfstr3 : db "Inteiro %d convertido para double = %f",10, 0
-    pfstr4 : db "pi? = %f, int(pi) = %d", 10, 0
-    
-    sfstr1 : db "%d",0
-
-    fppi : dq 3.1415    ; double
+    pf_p1  : db "Digite as coordenadas (x y z) do ponto 1: ", 0
+    pf_p2  : db "Digite as coordenadas (x y z) do ponto 2: ", 0
+    sf_p   : db "%d %d %d", 0
+    pf_res : db "Distancia 3D = %f", 10, 0
 
 section .bss
-    inteiro1 : resd 1
-    float1   : resd 1
+    p1     : resd 3     ; int p1[3] = {x1, y1, z1} (12 bytes)
+    p2     : resd 3     ; int p2[3] = {x2, y2, z2} (12 bytes)
+    dist   : resq 1     ; double (8 bytes)
+
+extern printf
+extern scanf
 
 section .text
     global main
 
 main:
+    push rbp
+    mov rbp, rsp
+
+    ; printf("Digite as coordenadas (x y z) do ponto 1: ");
+    xor rax, rax
+    mov rdi, pf_p1
+    call printf
+
+    ; scanf("%d %d %d", &p1[0], &p1[1], &p1[2]);
+    xor rax, rax
+    mov rdi, sf_p
+    lea rsi, [p1]
+    lea rdx, [p1 + 4]
+    lea rcx, [p1 + 8]
+    call scanf
+
+    ; printf("Digite as coordenadas (x y z) do ponto 2: ");
+    xor rax, rax
+    mov rdi, pf_p2
+    call printf
+
+    ; scanf("%d %d %d", &p2[0], &p2[1], &p2[2]);
+    xor rax, rax
+    mov rdi, sf_p
+    lea rsi, [p2]
+    lea rdx, [p2 + 4]
+    lea rcx, [p2 + 8]
+    call scanf
+
+    ; dist = dis3Dlm(p1, p2);
+    mov rdi, p1 
+    mov rsi, p2
+    call dis3Dlm
+    movsd [dist], xmm0  ; salva resultado antes do printf
+
+    ; printf("Distancia 3D = %f\n", dist);
+    mov rax, 1 ; 1 float
+    mov rdi, pf_res
+    movsd xmm0, [dist]
+    call printf
+
+fim:
+    ; destack-frame
+    mov rsp, rbp
+    pop rbp
+    xor eax, eax
+    ret
+
+dis3Dlm:
     ; stack-frame
     push rbp
     mov rbp, rsp
 
-    ; eax = printf("Digite um Inteiro: ");
-    xor rax, rax
-    mov rdi, pfstr1 ; string de controle para printf
-    call printf 
+    
+    cvtsi2sd xmm0, dword [rsi]
+    cvtsi2sd xmm1, dword [rdi]
+    subsd    xmm0, xmm1
+    mulsd    xmm0, xmm0; xmm0 = dx^2
 
-    ; eax = scanf("%d", &inteiro1);
-    xor rax, rax
-    mov rdi, sfstr1
-    mov rsi, inteiro1
-    call scanf
-b:
-    ; Conversão de Inteiro para FP
-    ; xmm0 = (float) inteiro1
-    CVTSI2SS xmm0, dword [inteiro1] ; int 2 float
-l1:
-    ; eax = printf("Inteiro %d convertido para float = %f\n", inteiro1, xmm0);
-    mov rax, 1 ; existe um FP a ser impresso e já está em xmm0
-    mov rdi, pfstr2
-    mov esi, [inteiro1]
-    ; notas sobre printf e FP
-    ;       printf destroi xmmi após chamada, opcional: salvar float/double
-    MOVSS [float1], xmm0 ; salva FP em float1
-    ;       considera %f como double, necessário converter SS para SD
-    CVTSS2SD xmm0, xmm0 ; float 2 double 4 printf
-l11:
-    call printf
+    cvtsi2sd xmm1, dword [rsi + 4]
+    cvtsi2sd xmm2, dword [rdi + 4]
+    subsd    xmm1, xmm2
+    mulsd    xmm1, xmm1
+    addsd    xmm0, xmm1 ; xmm0 = dx^2 + dy^2
 
+    cvtsi2sd xmm1, dword [rsi + 8]
+    cvtsi2sd xmm2, dword [rdi + 8]
+    subsd    xmm1, xmm2
+    mulsd    xmm1, xmm1
+    addsd    xmm0, xmm1 ; xmm0 = dx^2 + dy^2 + dz^2
 
-l2:
-    ; eax = printf("Inteiro %d convertido para double = %f\n", inteiro1, xmm0);
-    mov rax, 1 ; existe um FP a ser impresso
-    mov rdi, pfstr3
-    mov esi, [inteiro1]
-    CVTSS2SD xmm0, [float1] ; float 2 double 4 printf
-l21:
-    call printf
+    ; xmm0 = raiz(dx^2 + dy^2 + dz^2)
+    sqrtsd   xmm0, xmm0
 
-
-l3:
-    ; eax = printf("pi? = %f, int(pi) = $d", fppi, int(fppi));
-    ; eax = printf("pi? = %f, int(pi) = $d", xmm0, esi);
-    mov rax, 1 ; existe um FP a ser impresso
-    mov rdi, pfstr4
-    MOVSD xmm0, [fppi]
-    CVTSD2SI esi, qword [fppi]
-l31:
-    call printf
-
-
-fim:
-    ; "destack-frame!"
+    ; destack-frame e retorno (resultado em xmm0)
     mov rsp, rbp
     pop rbp
-
-    mov rax, _exit
-    mov rdi, 0
-    syscall
-
+    ret
