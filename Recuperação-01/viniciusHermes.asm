@@ -13,7 +13,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; INICIO ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-; n sei se vc ja passou isso mas eu procurei voluntariamente na internet pra ver se
+; n lembro se vc ja passou isso mas eu procurei voluntariamente na internet pra ver se
 ;    tinha algo que dava pra abstrair esse write de \n 
 %macro endL 0
     mov rax, 1
@@ -131,7 +131,7 @@ converteCada:
     jge fimConverte
 
     cmp r9, 0
-    jnz naoPrimeira ; se não é a primeira consigo acessar strLida[i - 1]
+    jnz naoPrimeira
     ; se é a primeira eu já jogo o primeiro valor para o reg do menor (cl) e comparo com ele as proximas
 
     mov cl, [strLida + r9] ; strLida[i] para al
