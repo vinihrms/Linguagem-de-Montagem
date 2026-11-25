@@ -43,55 +43,55 @@ main:
     xor rax, rax
     mov rdi, scanPontos
     lea rsi, [guardaP1]
-    lea rdx, [guardaP1+4]
-    lea rcx, [guardaP1+8]
+    lea rdx, [guardaP1+8]
+    lea rcx, [guardaP1+16]
     call scanf
 
     ; print entrada p2
     xor rax, rax
     mov rdi, printEntrada
-    mov esi, 1
+    mov esi, 2
     call printf
 
     xor rax, rax
     mov rdi, scanPontos
     lea rsi, [guardaP2]
-    lea rdx, [guardaP2+4]
-    lea rcx, [guardaP2+8]
+    lea rdx, [guardaP2+8]
+    lea rcx, [guardaP2+16]
     call scanf
 
     ; print entrada p3
     xor rax, rax
     mov rdi, printEntrada
-    mov esi, 1
+    mov esi, 2
     call printf
 
     xor rax, rax
     mov rdi, scanPontos
     lea rsi, [guardaP3]
-    lea rdx, [guardaP3+4]
-    lea rcx, [guardaP3+8]
+    lea rdx, [guardaP3+8]
+    lea rcx, [guardaP3+16]
     call scanf
     
-    lea rdi, guardaP1
-    lea rsi, guardaP2
+    lea rdi, [guardaP1]
+    lea rsi, [guardaP2]
     call distancia2p
     movsd [d1], xmm0
 
-    lea rdi, guardaP1
-    lea rsi, guardaP3
+    lea rdi, [guardaP1]
+    lea rsi, [guardaP3]
     call distancia2p
     movsd [d2], xmm0
 
-    lea rdi, guardaP2
-    lea rsi, guardaP3
+    lea rdi, [guardaP2]
+    lea rsi, [guardaP3]
     call distancia2p
     movsd [d3], xmm0
 
     ; print P1 - P2
     mov eax, 1; 1 argumento double em xmm0
     mov rdi, printSaida
-    mov rdi, 1
+    mov rsi, 1
     mov rdx, 2
     movsd xmm0, [d1]
     call printf
@@ -100,7 +100,7 @@ main:
     ; print P1 - P3
     mov eax, 1; 1 argumento double em xmm0
     mov rdi, printSaida
-    mov rdi, 1
+    mov rsi, 1
     mov rdx, 3
     movsd xmm0, [d2]
     call printf
@@ -108,7 +108,7 @@ main:
     ; print P2 - P3
     mov eax, 1; 1 argumento double em xmm0
     mov rdi, printSaida
-    mov rdi, 2
+    mov rsi, 2
     mov rdx, 3
     movsd xmm0, [d3]
     call printf
@@ -129,11 +129,11 @@ distancia2p:
     ; xmm0-2 -> x1, y1, z1
     ; xmm3-5 -> x2, y2, z2
     movsd xmm0, dword [rdi]    ; x1
-    movsd xmm1, dword [rdi+4]  ; y1
-    movsd xmm2, dword [rdi+8]  ; z1
+    movsd xmm1, dword [rdi+8]  ; y1
+    movsd xmm2, dword [rdi+16]  ; z1
     movsd xmm3, dword [rsi]    ; x2
-    movsd xmm4, dword [rsi+4]  ; y2
-    movsd xmm5, dword [rsi+8]  ; z2
+    movsd xmm4, dword [rsi+8]  ; y2
+    movsd xmm5, dword [rsi+16]  ; z2
 
     ; xmm0 = (x1 - x2)^2  
     subsd xmm0, xmm3    ; (x1 - x2)
