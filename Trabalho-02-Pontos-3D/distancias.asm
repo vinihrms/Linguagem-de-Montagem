@@ -15,9 +15,9 @@ section .data
     printSaida : db "Distância entre P%d e P%d = %f",10,0
 
 section .bss
-    guardaP1 : resd 3 ; x1, y1, z1
-    guardaP2 : resd 3 ; x2, y2, z2
-    guardaP3 : resd 3 ; x3, y3, z3
+    guardaP1 : resq 3 ; x1, y1, z1
+    guardaP2 : resq 3 ; x2, y2, z2
+    guardaP3 : resq 3 ; x3, y3, z3
 
     ; distancias
     d1 : resd 1 ; p1 p2
@@ -63,7 +63,7 @@ main:
     ; print entrada p3
     xor rax, rax
     mov rdi, printEntrada
-    mov esi, 2
+    mov esi, 3
     call printf
 
     xor rax, rax
@@ -128,12 +128,12 @@ distancia2p:
     ; movsd porque o scanf guardou em double já
     ; xmm0-2 -> x1, y1, z1
     ; xmm3-5 -> x2, y2, z2
-    movsd xmm0, dword [rdi]    ; x1
-    movsd xmm1, dword [rdi+8]  ; y1
-    movsd xmm2, dword [rdi+16]  ; z1
-    movsd xmm3, dword [rsi]    ; x2
-    movsd xmm4, dword [rsi+8]  ; y2
-    movsd xmm5, dword [rsi+16]  ; z2
+    movsd xmm0, qword [rdi]    ; x1
+    movsd xmm1, qword [rdi+8]  ; y1
+    movsd xmm2, qword [rdi+16]  ; z1
+    movsd xmm3, qword [rsi]    ; x2
+    movsd xmm4, qword [rsi+8]  ; y2
+    movsd xmm5, qword [rsi+16]  ; z2
 
     ; xmm0 = (x1 - x2)^2  
     subsd xmm0, xmm3    ; (x1 - x2)
